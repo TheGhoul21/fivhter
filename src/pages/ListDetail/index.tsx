@@ -124,7 +124,7 @@ const ListDetailPage = () => {
   return (
     <div className="list-detail-container">
       <div className="list-detail-header">
-        <h1>{list.title}</h1>
+        <h1 className="list-title">{list.title}</h1>
         
         {list.description && (
           <p className="list-description">{list.description}</p>
@@ -136,62 +136,51 @@ const ListDetailPage = () => {
             <Link to={`/profile/${list.user_id}`} className="list-author">
               @{list.username}
             </Link>
+            <span className="list-date">• {formatDate(list.created_at)}</span>
           </div>
-          <div className="list-stats">
-            <div className="list-stat">
-              <button 
-                onClick={handleVote} 
-                className={`vote-button ${isVoted ? 'voted' : ''}`}
-                aria-label={isVoted ? 'Remove vote' : 'Vote for this list'}
-              >
-                {isVoted ? '★' : '☆'}
-              </button>
-              <span>{voteCount}</span>
-            </div>
-            <div className="list-stat">
-              <span className="stat-icon">💬</span>
-              <span>{list.comment_count}</span>
-            </div>
-            <div className="list-date">
-              Created {formatDate(list.created_at)}
-            </div>
+          <div className="list-actions">
+            <button 
+              onClick={handleVote} 
+              className={`vote-button ${isVoted ? 'voted' : ''}`}
+              aria-label={isVoted ? 'Remove vote' : 'Vote for this list'}
+            >
+              {isVoted ? '★' : '☆'} <span>{voteCount}</span>
+            </button>
+            <span className="comment-count">💬 {list.comment_count}</span>
           </div>
         </div>
       </div>
       
-      <div className="list-items-container">
-        <h2>The Top 5</h2>
-        
-        <ol className="list-items">
-          {list.items.map((item) => (
-            <li 
-              key={item.id} 
-              className="list-item-detail"
-              data-rank={item.rank}
-            >
-              <div className="item-content">
-                <h3 className="item-title">{item.title}</h3>
+      <ol className="list-items-container">
+        {list.items.map((item) => (
+          <li 
+            key={item.id} 
+            className="list-item-card"
+          >
+            <div className="list-item-content">
+              <div className="list-item-rank-container">
+                <span className="list-item-rank">{item.rank}</span>
+              </div>
+              <div className="list-item-details">
+                <h3 className="list-item-title">{item.title}</h3>
                 {item.description && (
-                  <p className="item-description">{item.description}</p>
+                  <p className="list-item-description">{item.description}</p>
                 )}
               </div>
-            </li>
-          ))}
-        </ol>
-      </div>
+            </div>
+          </li>
+        ))}
+      </ol>
       
-      {/* In a full implementation, the comments section would go here */}
-      <div className="list-actions">
-        <Link to="/" className="button button-secondary">
-          Back to Home
+      <div className="list-footer">
+        <Link to="/" className="back-link">
+          ← Back
         </Link>
         
         {user && user.id === list.user_id && (
-          <div className="owner-actions">
-            <Link to={`/edit/${list.id}`} className="button button-primary">
-              Edit List
-            </Link>
-          </div>
+          <Link to={`/edit/${list.id}`} className="edit-link">
+            Edit List
+          </Link>
         )}
       </div>
     </div>
