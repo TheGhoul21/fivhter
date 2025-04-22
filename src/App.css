@@ -1,0 +1,29 @@
+/* We're using TailwindCSS for styling, so we don't need most of these default styles */
+
+#root {
+  width: 100%;
+}
+
+/* Orange and white theme */
+.bg-theme {
+  background-color: #fff;
+}
+
+.text-theme {
+  color: #f97316; /* primary-500 orange */
+}
+
+/* Button styling with orange */
+.btn-primary {
+  @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500;
+}
+
+/* Navbar styling */
+.navbar {
+  @apply bg-primary-500 text-white;
+}
+
+/* Footer styling */
+.footer {
+  @apply bg-primary-500 text-white;
+}
