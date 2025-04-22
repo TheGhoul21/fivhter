@@ -362,6 +362,7 @@ body {
     rgba(249, 115, 22, 0.8) 50%, 
     rgba(249, 115, 22, 0.9) 75%,
     rgba(249, 115, 22, 0.8) 100%);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover::before {
@@ -456,6 +457,7 @@ body {
     #f97316 50%, 
     #ea580c 75%,
     #f97316 100%);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .recent-list:hover::before {
@@ -959,6 +961,7 @@ body {
   font-size: 1.25rem;
   flex-shrink: 0;
   color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Rank-specific colors */
@@ -1110,6 +1113,18 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   padding: 1.5rem;
   margin-bottom: 2rem;
+  position: relative;
+}
+
+.list-items-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #f97316, #fdba74);
+  border-radius: 4px 4px 0 0;
 }
 
 .list-items-container h2 {
@@ -1157,6 +1172,7 @@ body {
   font-weight: bold;
   border-radius: 0.5rem 0 0 0.5rem;
   color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Rank-specific gradient backgrounds */
@@ -1517,6 +1533,10 @@ a:hover {
   border-top: 4px solid #f97316;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 5px 15px rgba(249, 115, 22, 0.1);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.3s ease;
 }
 
 .featured-card::after {
@@ -1532,8 +1552,39 @@ a:hover {
   pointer-events: none;
 }
 
+.featured-card::before {
+  content: "5";
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.8), rgba(249, 115, 22, 0.2));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  opacity: 0.9;
+  transform: rotate(15deg);
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-size: 200% 100%;
+  animation: shine 3s infinite linear, starShine 3s infinite ease-in-out;
+  background-image: linear-gradient(135deg, 
+    rgba(249, 115, 22, 0.8) 0%, 
+    rgba(249, 115, 22, 0.9) 25%,
+    rgba(249, 115, 22, 0.8) 50%, 
+    rgba(249, 115, 22, 0.9) 75%,
+    rgba(249, 115, 22, 0.8) 100%);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 .featured-card:hover {
-  box-shadow: 0 10px 20px rgba(249, 115, 22, 0.15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(249, 115, 22, 0.2);
 }
 
 .featured-card .card-title {
@@ -1543,4 +1594,21 @@ a:hover {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+
+@keyframes starShine {
+  0% {
+    opacity: 0.6;
+    transform: scale(1) rotate(15deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(20deg);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1) rotate(15deg);
+  }
 }
